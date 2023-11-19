@@ -1,0 +1,64 @@
+(base) ian@ian-Latitude-E7440:~$ nano timespacematrix.f
+(base) ian@ian-Latitude-E7440:~$ gfortran timespacematrix.f -o timespacematrix
+(base) ian@ian-Latitude-E7440:~$ ./timespacematrix
+   0  1  2  3  4  5  6  7  8  9   1  2  3  4  5  6  7  8  9 10   2  3  4  5  6  7  8  9 10 11   3  4  5  6  7  8  9 10 11 12   4  5  6  7  8  9 10 11 12 13   5  6  7  8  9 10 11 12 13 14   6  7  8  9 10 11 12 13 14 15   7  8  9 10 11 12 13 14 15 16   8  9 10 11 12 13 14 15 16 17   9 10 11 12 13 14 15 16 17 18
+(base) ian@ian-Latitude-E7440:~$ python3 timespacematrix.py
+[[ 0.  1.  2.  3.  4.  5.  6.  7.  8.  9.]
+ [ 1.  2.  3.  4.  5.  6.  7.  8.  9. 10.]
+ [ 2.  3.  4.  5.  6.  7.  8.  9. 10. 11.]
+ [ 3.  4.  5.  6.  7.  8.  9. 10. 11. 12.]
+ [ 4.  5.  6.  7.  8.  9. 10. 11. 12. 13.]
+ [ 5.  6.  7.  8.  9. 10. 11. 12. 13. 14.]
+ [ 6.  7.  8.  9. 10. 11. 12. 13. 14. 15.]
+ [ 7.  8.  9. 10. 11. 12. 13. 14. 15. 16.]
+ [ 8.  9. 10. 11. 12. 13. 14. 15. 16. 17.]
+ [ 9. 10. 11. 12. 13. 14. 15. 16. 17. 18.]]
+(base) ian@ian-Latitude-E7440:~$ cat timespacematrix.py
+import numpy as np
+
+# Define the dimensions of the matrix
+time_units = 10
+space_units = 10
+
+# Create a matrix of zeros with the defined dimensions
+time_space_matrix = np.zeros((time_units, space_units))
+
+# Fill the matrix with values (this is just an example, you can use your own logic)
+for t in range(time_units):
+    for s in range(space_units):
+        # Example logic: each cell is the sum of its time and space indices
+        time_space_matrix[t, s] = t + s
+
+# Display the matrix
+print(time_space_matrix)
+(base) ian@ian-Latitude-E7440:~$ cat timespacematrix.f
+      PROGRAM TimeSpaceMatrix
+      INTEGER, PARAMETER :: timeSize = 10
+      INTEGER, PARAMETER :: spaceSize = 10
+      integer  matrix(timeSize, spaceSize)
+      INTEGER i, j
+
+!     Initialize the matrix
+      DO i = 1, timeSize
+         DO j = 1, spaceSize
+            matrix(i, j) = 0.0D0
+         END DO
+      END DO
+
+!     Fill the matrix with your data
+!     Example: matrix(i, j) = i*j (or any function of i and j)
+      DO i = 1, timeSize
+         DO j = 1, spaceSize
+            matrix(i, j) = i + j - 2  ! Replace with your function
+         END DO
+      END DO
+
+!     Print the matrix (optional)
+!      DO i = 1, timeSize
+!         print *, matrix
+       write(6,9000) ((matrix(i,j),i=1,10),j=1,10)
+9000   format(10(" ",10(" ",i2)))
+!      END DO
+
+      END Program
+(base) ian@ian-Latitude-E7440:~$ 
