@@ -1,0 +1,74 @@
+(base) ian@ian-Latitude-E7440:~$ gfortran timespacematrix.f -o timespacematrix
+(base) ian@ian-Latitude-E7440:~$ ./timespacematrix
+   1.0000000000000000        2.0000000000000000        3.0000000000000000        4.0000000000000000        5.0000000000000000        6.0000000000000000        7.0000000000000000        8.0000000000000000        9.0000000000000000        10.000000000000000     
+   2.0000000000000000        4.0000000000000000        6.0000000000000000        8.0000000000000000        10.000000000000000        12.000000000000000        14.000000000000000        16.000000000000000        18.000000000000000        20.000000000000000     
+   3.0000000000000000        6.0000000000000000        9.0000000000000000        12.000000000000000        15.000000000000000        18.000000000000000        21.000000000000000        24.000000000000000        27.000000000000000        30.000000000000000     
+   4.0000000000000000        8.0000000000000000        12.000000000000000        16.000000000000000        20.000000000000000        24.000000000000000        28.000000000000000        32.000000000000000        36.000000000000000        40.000000000000000     
+   5.0000000000000000        10.000000000000000        15.000000000000000        20.000000000000000        25.000000000000000        30.000000000000000        35.000000000000000        40.000000000000000        45.000000000000000        50.000000000000000     
+   6.0000000000000000        12.000000000000000        18.000000000000000        24.000000000000000        30.000000000000000        36.000000000000000        42.000000000000000        48.000000000000000        54.000000000000000        60.000000000000000     
+   7.0000000000000000        14.000000000000000        21.000000000000000        28.000000000000000        35.000000000000000        42.000000000000000        49.000000000000000        56.000000000000000        63.000000000000000        70.000000000000000     
+   8.0000000000000000        16.000000000000000        24.000000000000000        32.000000000000000        40.000000000000000        48.000000000000000        56.000000000000000        64.000000000000000        72.000000000000000        80.000000000000000     
+   9.0000000000000000        18.000000000000000        27.000000000000000        36.000000000000000        45.000000000000000        54.000000000000000        63.000000000000000        72.000000000000000        81.000000000000000        90.000000000000000     
+   10.000000000000000        20.000000000000000        30.000000000000000        40.000000000000000        50.000000000000000        60.000000000000000        70.000000000000000        80.000000000000000        90.000000000000000        100.00000000000000     
+(base) ian@ian-Latitude-E7440:~$ cat timespacematrix.f
+      PROGRAM TimeSpaceMatrix
+      INTEGER, PARAMETER :: timeSize = 10
+      INTEGER, PARAMETER :: spaceSize = 10
+      DOUBLE PRECISION matrix(timeSize, spaceSize)
+      INTEGER i, j
+
+!     Initialize the matrix
+      DO i = 1, timeSize
+         DO j = 1, spaceSize
+            matrix(i, j) = 0.0D0
+         END DO
+      END DO
+
+!     Fill the matrix with your data
+!     Example: matrix(i, j) = i*j (or any function of i and j)
+      DO i = 1, timeSize
+         DO j = 1, spaceSize
+            matrix(i, j) = real(i * j)  ! Replace with your function
+         END DO
+      END DO
+
+!     Print the matrix (optional)
+      DO i = 1, timeSize
+         WRITE(*,*) (matrix(i, j), j = 1, spaceSize)
+      END DO
+
+      END Program
+(base) ian@ian-Latitude-E7440:~$ sloccount timespacematrix.f
+Have a non-directory at the top, so creating directory top_dir
+Adding /home/ian/timespacematrix.f to top_dir
+Categorizing files.
+Finding a working MD5 command....
+Found a working MD5 command.
+Computing results.
+
+
+SLOC	Directory	SLOC-by-Language (Sorted)
+19      top_dir         fortran=19
+
+
+Totals grouped by language (dominant language first):
+fortran:         19 (100.00%)
+
+
+
+
+Total Physical Source Lines of Code (SLOC)                = 19
+Development Effort Estimate, Person-Years (Person-Months) = 0.00 (0.04)
+ (Basic COCOMO model, Person-Months = 2.4 * (KSLOC**1.05))
+Schedule Estimate, Years (Months)                         = 0.06 (0.72)
+ (Basic COCOMO model, Months = 2.5 * (person-months**0.38))
+Estimated Average Number of Developers (Effort/Schedule)  = 0.05
+Total Estimated Cost to Develop                           = $ 421
+ (average salary = $56,286/year, overhead = 2.40).
+SLOCCount, Copyright (C) 2001-2004 David A. Wheeler
+SLOCCount is Open Source Software/Free Software, licensed under the GNU GPL.
+SLOCCount comes with ABSOLUTELY NO WARRANTY, and you are welcome to
+redistribute it under certain conditions as specified by the GNU GPL license;
+see the documentation for details.
+Please credit this data as "generated using David A. Wheeler's 'SLOCCount'."
+(base) ian@ian-Latitude-E7440:~$ 
